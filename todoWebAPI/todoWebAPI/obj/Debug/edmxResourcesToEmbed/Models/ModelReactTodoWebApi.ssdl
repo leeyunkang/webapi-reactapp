@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="projectAdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="recordTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="100" />
+    <Property Name="Detail" Type="varchar" MaxLength="255" />
+    <Property Name="CreatedTime" Type="datetime" />
+    <Property Name="EndTime" Type="datetime" />
+    <Property Name="Status" Type="int" />
+    <Property Name="UserID" Type="int" />
+  </EntityType>
+  <EntityType Name="userLoginTable">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__recordTab__UserI__3D5E1FD2">
+    <End Role="userLoginTable" Type="Self.userLoginTable" Multiplicity="0..1" />
+    <End Role="recordTable" Type="Self.recordTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userLoginTable">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="recordTable">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="projectAdbModelStoreContainer">
+    <EntitySet Name="recordTable" EntityType="Self.recordTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="userLoginTable" EntityType="Self.userLoginTable" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__recordTab__UserI__3D5E1FD2" Association="Self.FK__recordTab__UserI__3D5E1FD2">
+      <End Role="userLoginTable" EntitySet="userLoginTable" />
+      <End Role="recordTable" EntitySet="recordTable" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

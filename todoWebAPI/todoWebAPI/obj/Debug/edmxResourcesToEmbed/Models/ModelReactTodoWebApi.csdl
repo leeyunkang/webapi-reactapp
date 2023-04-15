@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="projectAdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="recordTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Detail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedTime" Type="DateTime" Precision="3" />
+    <Property Name="EndTime" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="UserID" Type="Int32" />
+    <NavigationProperty Name="userLoginTable" Relationship="Self.FK__recordTab__UserI__3D5E1FD2" FromRole="recordTable" ToRole="userLoginTable" />
+  </EntityType>
+  <EntityType Name="userLoginTable">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="recordTables" Relationship="Self.FK__recordTab__UserI__3D5E1FD2" FromRole="userLoginTable" ToRole="recordTable" />
+  </EntityType>
+  <Association Name="FK__recordTab__UserI__3D5E1FD2">
+    <End Role="userLoginTable" Type="Self.userLoginTable" Multiplicity="0..1" />
+    <End Role="recordTable" Type="Self.recordTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="userLoginTable">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="recordTable">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="projectAdbEntities5" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="recordTables" EntityType="Self.recordTable" />
+    <EntitySet Name="userLoginTables" EntityType="Self.userLoginTable" />
+    <AssociationSet Name="FK__recordTab__UserI__3D5E1FD2" Association="Self.FK__recordTab__UserI__3D5E1FD2">
+      <End Role="userLoginTable" EntitySet="userLoginTables" />
+      <End Role="recordTable" EntitySet="recordTables" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
