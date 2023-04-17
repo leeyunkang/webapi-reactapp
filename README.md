@@ -29,4 +29,4 @@ This project consists of a WebAPI backend and a React frontend.
 - Make sure all dependencies are installed before running the project.
 - Ensure that SQL Server is running and accessible before executing the SQL query.
 - Adjust database configurations if necessary to match your environment.
-- For any issues or inquiries, feel free to reach out to the project maintainers.
+- For any issues or inquiries, feel free to reach out to the project maintai
