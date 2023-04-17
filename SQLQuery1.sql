@@ -13,5 +13,5 @@ CREATE TABLE recordTable (
   EndTime DATETIME,
   Status INT,
   UserID INT,
-  FOREIGN KEY (UserID) REFERNCES userLoginTable(UserID)
+  FOREIGN KEY (UserID) REFERENCES userLoginTable(UserID)
 );
