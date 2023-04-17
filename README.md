@@ -6,5 +6,5 @@
 
 # Open the record-app
 
-# run npm start
+# run npm star
 
